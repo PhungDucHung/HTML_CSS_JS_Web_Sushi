@@ -25,7 +25,6 @@ if (navClose) {
 
 
 /*=============== REMOVE MENU MOBILE ===============*/
-// Chọn tất cả các phần tử có lớp 'nav__link' và lưu vào biến navLink dưới dạng NodeList
 // được sử dụng để chọn và lưu trữ tất cả các phần tử HTML có lớp nav__link trong một biến. Dưới đây là giải thích chi tiết về từng phần của câu lệnh này:
 const navLink = document.querySelectorAll('.nav__link');
 // Định nghĩa hàm linkAction để thực hiện hành động khi nhấp vào các liên kết
