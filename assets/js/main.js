@@ -4,27 +4,57 @@ const navMenu = document.getElementById('nav-menu'),
       navClose = document.getElementById('nav-close')
 
 /*============= MENU SHOW =============*/ 
-// Validate if constant exists
-if(navToggle){
+// Kiểm tra xem biến `navToggle` có giá trị (không phải `null` hoặc `undefined`) trước khi thêm sự kiện
+if (navToggle) {
+    // Thêm sự kiện 'click' vào phần tử `navToggle`
     navToggle.addEventListener('click', () => {
-        navMenu.classList.add('show-menu')
-    })
+        // Khi phần tử `navToggle` được nhấp, thêm lớp 'show-menu' vào phần tử `navMenu`
+        navMenu.classList.add('show-menu');
+    });
 }
 
 /*============= MENU HIDDEN =============*/ 
-if(navClose){
+// Kiểm tra xem phần tử có id 'nav-close' có tồn tại không
+if (navClose) {
+    // Nếu phần tử tồn tại, thêm một sự kiện 'click' vào phần tử này
     navClose.addEventListener('click', () => {
-        navMenu.classList.remove('show-menu')
-    })
+        // Khi người dùng nhấp vào phần tử 'navClose', loại bỏ lớp 'show-menu' khỏi phần tử 'navMenu'
+        navMenu.classList.remove('show-menu');
+    });
 }
 
 
-
 /*=============== REMOVE MENU MOBILE ===============*/
-
+// Chọn tất cả các phần tử có lớp 'nav__link' và lưu vào biến navLink dưới dạng NodeList
+// được sử dụng để chọn và lưu trữ tất cả các phần tử HTML có lớp nav__link trong một biến. Dưới đây là giải thích chi tiết về từng phần của câu lệnh này:
+const navLink = document.querySelectorAll('.nav__link');
+// Định nghĩa hàm linkAction để thực hiện hành động khi nhấp vào các liên kết
+const linkAction = () => {
+    // Lấy phần tử có id 'nav-menu'
+    const navMenu = document.getElementById('nav-menu');
+    // Khi nhấp vào bất kỳ liên kết nào, loại bỏ lớp 'show-menu' khỏi phần tử 'navMenu'
+    navMenu.classList.remove('show-menu');
+};
+// Lặp qua từng phần tử trong NodeList navLink
+navLink.forEach(n => {
+    // Thêm sự kiện 'click' cho từng phần tử, gọi hàm linkAction khi sự kiện xảy ra
+    n.addEventListener('click', linkAction);
+});
 
 /*=============== CHANGE BACKGROUND HEADER ===============*/
+// Định nghĩa hàm scrollHeader để thay đổi lớp của phần tử header dựa trên vị trí cuộn của trang
+const scrollHeader = () => {
+    // Lấy phần tử có id 'header'
+    const header = document.getElementById('header');
 
+    // Khi vị trí cuộn của trang (scrollY) lớn hơn hoặc bằng 50 viewport height,
+    // thêm lớp 'bg-header' vào phần tử header
+    // Nếu không, xóa lớp 'bg-header' khỏi phần tử header
+    window.scrollY >= 50 ? header.classList.add('bg-header') : header.classList.remove('bg-header');
+}
+
+// Thêm sự kiện 'scroll' cho đối tượng window, gọi hàm scrollHeader khi người dùng cuộn trang
+window.addEventListener('scroll', scrollHeader);
 
 /*=============== SHOW SCROLL UP ===============*/ 
 

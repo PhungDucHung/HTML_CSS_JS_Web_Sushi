@@ -36,7 +36,7 @@
   --font-semi-bold: 600; 
 
   /*========== z index ==========*/
-  /* Các giá trị z-index */
+  /* Các giá trị z-index độ ưu tiên thằng nào hiển thị trước */
   --z-tooltip: 10; /* Độ ưu tiên của tooltip */
   --z-fixed: 100; /* Độ ưu tiên của các phần tử cố định */
 }
@@ -142,16 +142,27 @@ img {
 
 /*=============== HEADER & NAV ===============*/
 .header {
-    position: fixed; 
-    width: 100%;
-    background-color: var(--body-color);
-    top: 0;
-    left: 0;
-    z-index: var(--z-fixed);
-    transition: box-shadow .3s, background .4s;
+  /* Đặt vị trí của phần tử header là cố định, khiến nó luôn ở vị trí trên cùng của trang khi cuộn */
+  position: fixed; 
+  /* Đặt chiều rộng của phần tử header bằng 100% chiều rộng của viewport, đảm bảo nó kéo dài toàn bộ chiều ngang của trang */
+  width: 100%;
+  background-color: var(--body-color);
+  /* Đặt khoảng cách từ phần tử header đến cạnh trên của viewport là 0, đảm bảo nó luôn nằm ở phía trên cùng của trang */
+  top: 0;
+  /* Đặt khoảng cách từ phần tử header đến cạnh trái của viewport là 0, đảm bảo nó bắt đầu từ cạnh trái của trang */
+  left: 0;
+  /* Đặt chỉ số z của phần tử header để đảm bảo nó nằm trên các phần tử khác. Biến --z-fixed có thể được định nghĩa để chỉ định giá trị z-index */
+  z-index: var(--z-fixed);
+  /* Thêm hiệu ứng chuyển tiếp cho thuộc tính box-shadow và background-color. 
+     - box-shadow: chuyển tiếp trong 0.3 giây 
+     - background-color: chuyển tiếp trong 0.4 giây */
+  transition: box-shadow .3s, background-color .4s;
 }
 
+
 .nav{
+   /* Đặt vị trí của phần tử header theo kiểu tương đối. 
+     Điều này cho phép các phần tử con có thể được định vị tuyệt đối (absolute) dựa trên phần tử này. */
   position: relative;
   height: var(--header-height);
   display: flex;
@@ -168,7 +179,7 @@ img {
 
 .nav__logo{
   align-items: center;
-  column-gap: .5rem;
+  gap: .5rem;
   font-family: var(--title-font);
   font-size: var(--h3-font-size);
   font-weight: var(--font-semi-bold);
@@ -191,11 +202,22 @@ img {
 @media screen and (max-width: 768px) {
     .nav__menu{
       position: fixed;
+      /* Đặt khoảng cách từ phần tử .nav__menu đến cạnh trên của viewport là -100%.
+      Điều này giúp phần tử nằm hoàn toàn ngoài tầm nhìn phía trên viewport khi trang đầu tiên được tải. */
       top: -100%;
+      /* Đặt khoảng cách từ phần tử .nav__menu đến cạnh trái của viewport là 0.
+           Điều này làm cho phần tử nằm sát cạnh trái của viewport. */
       left: 0;
       background-color: var(--body-color);
       width: 100%;
+       /* Thêm hiệu ứng box-shadow cho phần tử .nav__menu.
+           - 0: khoảng cách đổ bóng theo chiều ngang (không có dịch chuyển).
+           - 8px: khoảng cách đổ bóng theo chiều dọc.
+           - 20px: độ mờ của đổ bóng.
+           - hsla(19, 64%, 24%, .1): màu sắc và độ trong suốt của đổ bóng. */
       box-shadow: 0 8px 20px hsla(19, 64%, 24%, .1);
+        /* Đặt khoảng cách nội dung của phần tử .nav__menu theo chiều dọc là 3.5rem.
+      Điều này thêm không gian ở trên và dưới nội dung bên trong phần tử. */
       padding-block: 3.5rem;
       transition: top .4s;
     }
@@ -234,8 +256,15 @@ img {
 
 .nav__img-1{
   width: 100px;
+  /* Đặt khoảng cách từ phần tử đến cạnh trên của phần chứa (viewport) là 0.75rem.
+   Kích thước này phụ thuộc vào kích thước font gốc (ví dụ, nếu 1rem = 16px, thì 0.75rem = 12px). */
   top: .75rem;
+  /* Đặt khoảng cách từ phần tử đến cạnh trái của phần chứa (viewport) là -2rem.
+   Giá trị âm có nghĩa là phần tử sẽ nằm lệch về phía trái so với vị trí bắt đầu ở cạnh trái của viewport.
+   (Nếu 1rem = 16px, thì -2rem = -32px, tức là phần tử sẽ bị đẩy sang trái 32px so với vị trí gốc). */
   left: -2rem;
+  /* Áp dụng phép xoay cho phần tử 165 độ theo chiều kim đồng hồ.
+   Điều này làm cho phần tử quay một góc 165 độ so với vị trí gốc của nó. */
   transform: rotate(165deg);
 }
 
@@ -250,43 +279,116 @@ img {
   top:0;
 }
 /* Change background header */
+.bg-header{
+  box-shadow: 0 2px hsla(19, 64%, 24%, .1);
+}
 /* Quy tắc để thay đổi nền header */
 
 /* Active link */
 /* Quy tắc để đánh dấu liên kết đang hoạt động */
 
 /*=============== HOME ===============*/
-/* Các quy tắc cho phần trang chủ (có thể được định nghĩa ở đây) */
+.home{
+  position: relative;
+}
+.home__container{
+  row-gap: 3rem;
+  padding-top: 2rem;
+}
 
+.home__img{
+  width: 300px;
+  justify-self: center;
+}
+
+.home__data{
+  text-align: center;
+}
+
+.home__title{
+  font-size: var(--biggest-font-size);
+  font-family: var(--title-font);
+  margin-bottom: 1rem;
+}
+
+.home__title img{
+  width: 40px;
+}
+
+.home__title div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: .5rem;
+}
+
+.home__description{
+  padding: 0 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.home__leaf-1,
+.home__leaf-2{
+  position: absolute;
+  opacity: .2;
+}
+
+.home__leaf-1{
+  width: 80px;
+  top: 8rem;
+  left: -1rem;
+  transform: rotate(90deg);
+}
+
+.home__leaf-2{
+  width: 100px;
+  right: -2rem;
+  bottom: 1rem;
+  transform: rotate(-15deg);
+}
 /*=============== BUTTON ===============*/
-/* Các quy tắc cho các nút (có thể được định nghĩa ở đây) */
+.button{
+  display: inline-flex;
+  align-items:center ;
+  column-gap: .5rem;
+  background-color: var(--first-color);
+  padding: 1rem 1.5rem;
+  border-radius: 4rem;
+  color: #fff;
+  font-weight: var(--font-medium );
+  transition: background .3s;
+}
 
+.button i{
+  font-size: 1.5rem;
+  transition: transform .3s;
+}
+
+.button:hover{
+  background-color: var(--first-color-alt);
+}
+
+.button:hover i{
+  transform: translateX(.25rem);
+}
 /*=============== ABOUT ===============*/
-/* Các quy tắc cho phần giới thiệu (có thể được định nghĩa ở đây) */
 
 /*=============== POPULAR ===============*/
-/* Các quy tắc cho phần phổ biến (có thể được định nghĩa ở đây) */
 
 /*=============== RECENTLY ===============*/
-/* Các quy tắc cho phần gần đây (có thể được định nghĩa ở đây) */
 
 /*=============== NEWSLETTER ===============*/
-/* Các quy tắc cho phần bản tin (có thể được định nghĩa ở đây) */
 
 /*=============== FOOTER ===============*/
-/* Các quy tắc cho phần chân trang (có thể được định nghĩa ở đây) */
 
 /*=============== SCROLL BAR ===============*/
-/* Các quy tắc cho thanh cuộn (có thể được định nghĩa ở đây) */
 
 /*=============== SCROLL UP ===============*/
-/* Các quy tắc cho nút cuộn lên (có thể được định nghĩa ở đây) */
 
 /* Show Scroll Up*/
 /* Quy tắc để hiển thị nút cuộn lên */
 
 /*=============== BREAKPOINTS ===============*/
-/* Các điểm ngắt cho các kích thước màn hình khác nhau */
 
 /* For small devices */
 /* Quy tắc cho thiết bị nhỏ */
