@@ -285,8 +285,9 @@ img {
 /* Quy tắc để thay đổi nền header */
 
 /* Active link */
-/* Quy tắc để đánh dấu liên kết đang hoạt động */
-
+.active-link{
+  color: var(--first-color);
+}
 /*=============== HOME ===============*/
 .home{
   position: relative;

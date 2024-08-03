@@ -66,8 +66,36 @@ const scrollUp = () => {
 // Thêm sự kiện lắng nghe sự kiện cuộn của cửa sổ
 window.addEventListener('scroll', scrollUp);
 
-
 /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
+// Lấy tất cả các phần tử 'section' có thuộc tính 'id'
+const sections = document.querySelectorAll('section[id]');
+
+// Hàm kiểm tra và cập nhật liên kết điều hướng hoạt động dựa trên vị trí cuộn của trang
+const scrollActive = () => {
+    const scrollY = window.pageYOffset; // Lấy vị trí cuộn hiện tại của trang
+
+    // Duyệt qua từng phần tử 'section'
+    sections.forEach(current => {
+        // Lấy chiều cao của phần tử 'section' hiện tại
+        const sectionHeight = current.offsetHeight;
+        // Lấy vị trí từ đầu trang đến đầu phần tử 'section', cộng thêm 58px (có thể là chiều cao của thanh điều hướng)
+        const sectionTop = current.offsetTop - 58;
+        // Lấy id của phần tử 'section' hiện tại
+        const sectionId = current.getAttribute('id');
+        // Tìm liên kết điều hướng tương ứng với id của phần tử 'section'
+        const sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']');
+
+        // Kiểm tra nếu vị trí cuộn hiện tại nằm trong khoảng của phần tử 'section'
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            sectionsClass.classList.add('active-link'); // Thêm lớp 'active-link' cho liên kết điều hướng
+        } else {
+            sectionsClass.classList.remove('active-link'); // Xóa lớp 'active-link' khỏi liên kết điều hướng
+        }
+    });
+};
+
+// Thêm sự kiện lắng nghe sự kiện cuộn của cửa sổ để gọi hàm scrollActive
+window.addEventListener('scroll', scrollActive);
 
 
 /*=============== DARK LIGHT THEME ===============*/ 
