@@ -727,14 +727,51 @@ img {
 
 
 /*=============== SCROLL BAR ===============*/
+/* Định nghĩa kiểu cho thanh cuộn của phần tử */
+::-webkit-scrollbar {
+  width: .6rem; /* Đặt chiều rộng của thanh cuộn ngang là 0.6rem */
+  border-radius: .5rem; /* Bo góc của thanh cuộn với bán kính 0.5rem */
+  background-color: hsl(19, 8%, 75%); /* Màu nền của thanh cuộn với màu sắc hsl */
+}
 
+/* Định nghĩa kiểu cho phần kéo của thanh cuộn */
+::-webkit-scrollbar-thumb {
+  border-radius: .5rem; /* Bo góc của phần kéo với bán kính 0.5rem */
+  background-color: hsl(19, 8%, 65%); /* Màu nền của phần kéo với màu sắc hsl */
+}
 
-
-
+/* Định nghĩa kiểu cho phần kéo khi người dùng di chuột qua */
+::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(19, 8%, 55%); /* Thay đổi màu nền của phần kéo khi di chuột qua với màu sắc hsl */
+}
 /*=============== SCROLL UP ===============*/
+.scrollup {
+  position: fixed; /* Đặt phần tử ở vị trí cố định so với cửa sổ trình duyệt, giữ nó ở một vị trí cụ thể trên màn hình */
+  right: 1rem; 
+  bottom: -50%; /* Đặt phần tử bên dưới cửa sổ trình duyệt, không nhìn thấy trên màn hình; giá trị âm giúp phần tử bắt đầu bên ngoài tầm nhìn và di chuyển lên khi cần thiết */
+  background-color: var(--container-color); 
+  box-shadow: 0 4px 12px hsla(19, 64%, 24%, .1); /* Thêm bóng đổ cho phần tử, tạo hiệu ứng chiều sâu với độ mờ của bóng là 10% */
+  display: inline-flex; /* Sử dụng display inline-flex để phần tử có thể căn chỉnh nội dung theo hàng ngang và vẫn giữ được kiểu inline */
+  padding: .35rem; /* Thêm khoảng cách bên trong phần tử (padding) để tạo không gian giữa nội dung và viền của phần tử */
+  border-radius: .25rem; /* Bo góc của phần tử với bán kính 0.25rem, tạo hiệu ứng góc tròn */
+  font-size: 1.1rem; /* Đặt kích thước chữ của phần tử là 1.1 lần kích thước font gốc của tài liệu */
+  color: var(--first-color); /* Đặt màu chữ của phần tử từ biến CSS --first-color */
+  z-index: var(--z-tooltip); /* Đặt chỉ số z để phần tử nằm trên các phần tử khác, lấy giá trị từ biến CSS --z-tooltip */
+  transition: bottom .3s, transform .3s, background .4s; 
+}
 
-/* Show Scroll Up*/
-/* Quy tắc để hiển thị nút cuộn lên */
+
+.scrollup:hover{
+  transform: translateY(-.25rem);
+}
+
+/* Di chuyển phần tử lên vị trí 3rem từ đáy cửa sổ khi lớp 'show-scroll' được áp dụng */
+.show-scroll{
+  bottom: 3rem;
+}
+
+/* Show Scroll Up */
+
 
 /*=============== BREAKPOINTS ===============*/
 

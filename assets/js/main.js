@@ -56,6 +56,15 @@ const scrollHeader = () => {
 window.addEventListener('scroll', scrollHeader);
 
 /*=============== SHOW SCROLL UP ===============*/ 
+const scrollUp = () => {
+    const scrollUpButton = document.getElementById('scroll-up'); // Lấy phần tử với id 'scroll-up'
+    // Khi vị trí cuộn của trang (scrollY) lớn hơn hoặc bằng 350px, thêm lớp 'show-scroll' vào phần tử
+    // Nếu không, xóa lớp 'show-scroll' khỏi phần tử
+    this.scrollY >= 350 ? scrollUpButton.classList.add('show-scroll') : scrollUpButton.classList.remove('show-scroll'); 
+}
+
+// Thêm sự kiện lắng nghe sự kiện cuộn của cửa sổ
+window.addEventListener('scroll', scrollUp);
 
 
 /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
